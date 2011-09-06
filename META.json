@@ -1,0 +1,68 @@
+{
+   "abstract" : "Adapter-modifying plugins for Log::Any",
+   "author" : [
+      "Stephen Thirlwall <sdt@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300000, CPAN::Meta::Converter version 2.110440",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Log-Any-Plugin",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : 0,
+            "Data::Dumper" : 0,
+            "Exporter" : 0,
+            "Hash::Util" : 0,
+            "Log::Any" : "0.12",
+            "Log::Any::Adapter::Util" : 0,
+            "base" : 0,
+            "strict" : 0,
+            "warnings" : 0
+         }
+      },
+      "test" : {
+         "requires" : {
+            "English" : 0,
+            "File::Find" : 0,
+            "File::Temp" : 0,
+            "Log::Any::Adapter" : 0,
+            "Test::Differences" : 0,
+            "Test::Exception" : 0,
+            "Test::More" : 0,
+            "Test::NoWarnings" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "mailto" : "bug-Log-Any-Plugin@rt.cpan.org",
+         "web" : "https://rt.cpan.org/Public/Dist/Display.html?Name=Log-Any-Plugin"
+      },
+      "homepage" : "http://search.cpan.org/dist/Log-Any-Plugin",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/sdt/log-any-plugin.git",
+         "web" : "https://github.com/sdt/log-any-plugin"
+      }
+   },
+   "version" : "0.001"
+}
+
