@@ -1,6 +1,6 @@
 package Log::Any::Plugin::Util;
 {
-  $Log::Any::Plugin::Util::VERSION = '0.001';
+  $Log::Any::Plugin::Util::VERSION = '0.002';
 }
 # ABSTRACT: Utilities for Log::Any::Plugin classes
 
@@ -11,58 +11,10 @@ use Carp qw(croak);
 use base qw(Exporter);
 
 our @EXPORT_OK = qw(
-    before around after
     get_old_method
     set_new_method
     get_class_name
 );
-
-sub around {
-    my ($class, $method_name, $new_method) = @_;
-
-    my $old_method = get_old_method($class, $method_name);
-    croak $class . '::' . $method_name . ' not defined'
-        unless defined $old_method;
-
-    my $wrapper = sub {
-        my ($self, @args) = @_;
-        $new_method->($old_method, $self, @args);
-    };
-
-    set_new_method($class, $method_name, $wrapper);
-}
-
-sub after {
-    my ($class, $method_name, $new_method) = @_;
-    my $old_method = get_old_method($class, $method_name);
-
-    if ($old_method) {
-        set_new_method($class, $method_name, sub {
-            my ($self, @args) = @_;
-            $old_method->($self, @args);
-            $new_method->($self, @args);
-        });
-    }
-    else {
-        set_new_method($class, $method_name, $new_method);
-    }
-}
-
-sub before {
-    my ($class, $method_name, $new_method) = @_;
-    my $old_method = get_old_method($class, $method_name);
-
-    if ($old_method) {
-        set_new_method($class, $method_name, sub {
-            my ($self, @args) = @_;
-            $new_method->($self, @args);
-            $old_method->($self, @args);
-        });
-    }
-    else {
-        set_new_method($class, $method_name, $new_method);
-    }
-}
 
 sub get_old_method {
     my ($class, $method_name) = @_;
@@ -86,7 +38,7 @@ sub get_class_name {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -96,7 +48,7 @@ Log::Any::Plugin::Util - Utilities for Log::Any::Plugin classes
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 DESCRIPTION
 
@@ -105,78 +57,6 @@ These functions are only of use to authors of Log::Any::Plugin classes.
 Users should see Log::Any::Plugin instead.
 
 =head1 FUNCTIONS
-
-=head2 around ( $class, $method_name, &new_method )
-
-Applies an 'around' method modifier to the given method. Semantics are very
-similar to the 'around' method modifier in Moose.
-
-Throws an exception if no method by that name exists.
-
-=over
-
-=item * $class
-
-Name of class containing the method.
-
-=item * $method_name
-
-Name of method to be modified.
-
-=item * &new_method
-
-Coderef of the new method. Arguments are passed the same as a Moose 'around'
-modifier: ($old_method, $self, @args)
-
-=back
-
-=head2 before ( $class, $method_name, &new_method )
-
-Applies a 'before' method modifier to the given method. Semantics are very
-similar to the 'before' method modifier in Moose.
-
-Simply installs the new method if no method by that name exists.
-
-=over
-
-=item * $class
-
-Name of class containing the method.
-
-=item * $method_name
-
-Name of method to be modified.
-
-=item * &new_method
-
-Coderef of the new method. Arguments are passed the same as a Moose 'before'
-modifier: ($self, @args)
-
-=back
-
-=head2 after ( $class, $method_name, &new_method )
-
-Applies a 'after' method modifier to the given method. Semantics are very
-similar to the 'after' method modifier in Moose.
-
-Simply installs the new method if no method by that name exists.
-
-=over
-
-=item * $class
-
-Name of class containing the method.
-
-=item * $method_name
-
-Name of method to be modified.
-
-=item * &new_method
-
-Coderef of the new method. Arguments are passed the same as a Moose 'after'
-modifier: ($self, @args)
-
-=back
 
 =head2 get_old_method ( $class, $method_name )
 
@@ -199,8 +79,7 @@ Name of method to be modified.
 
 =item * &new_method
 
-Coderef of the new method. Unlike 'around', this method takes exactly the
-same parameters as the original method: ($self, @args)
+Coderef of the new method.
 
 =back
 
@@ -231,13 +110,9 @@ Stephen Thirlwall <sdt@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Stephen Thirlwall.
+This software is copyright (c) 2013 by Stephen Thirlwall.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

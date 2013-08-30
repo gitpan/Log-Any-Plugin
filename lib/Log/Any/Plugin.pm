@@ -1,6 +1,6 @@
 package Log::Any::Plugin;
 {
-  $Log::Any::Plugin::VERSION = '0.001';
+  $Log::Any::Plugin::VERSION = '0.002';
 }
 # ABSTRACT: Adapter-modifying plugins for Log::Any
 
@@ -26,7 +26,7 @@ sub add {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -36,7 +36,7 @@ Log::Any::Plugin - Adapter-modifying plugins for Log::Any
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -110,13 +110,9 @@ Stephen Thirlwall <sdt@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Stephen Thirlwall.
+This software is copyright (c) 2013 by Stephen Thirlwall.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

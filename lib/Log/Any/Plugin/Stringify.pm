@@ -1,13 +1,13 @@
 package Log::Any::Plugin::Stringify;
 {
-  $Log::Any::Plugin::Stringify::VERSION = '0.001';
+  $Log::Any::Plugin::Stringify::VERSION = '0.002';
 }
 # ABSTRACT: Custom argument stringification plugin for log adapters
 
 use strict;
 use warnings;
 
-use Log::Any::Plugin::Util qw( around );
+use Log::Any::Plugin::Util qw( get_old_method set_new_method );
 
 use Data::Dumper;
 
@@ -19,9 +19,10 @@ sub install {
     # Inject the stringifier into the existing logging methods
     #
     for my $method_name ( Log::Any->logging_methods() ) {
-        around($adapter_class, $method_name, sub {
-            my ($old_method, $self, @args) = @_;
-            $old_method->($self, $stringifier->(@args));
+        my $old_method = get_old_method($adapter_class, $method_name);
+        set_new_method($adapter_class, $method_name, sub {
+            my $self = shift;
+            $self->$old_method($stringifier->(@_));
         });
     }
 }
@@ -40,7 +41,7 @@ sub default_stringifier {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -50,7 +51,7 @@ Log::Any::Plugin::Stringify - Custom argument stringification plugin for log ada
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -117,13 +118,9 @@ Stephen Thirlwall <sdt@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Stephen Thirlwall.
+This software is copyright (c) 2013 by Stephen Thirlwall.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

@@ -1,5 +1,11 @@
 Revision History for perl module Log::Any::Plugin
 
-0.001 2011-09-06
+0.002     2013-08-30T16:44:53EST+1000
+
+    - Performance improvements
+    - Remove before/after/around functions
+        - use Class::Method::Modifiers instead if you need these
+
+0.001     2011-09-06
 
     - Initial release
