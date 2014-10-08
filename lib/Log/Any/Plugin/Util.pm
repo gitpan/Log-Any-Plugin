@@ -1,9 +1,6 @@
 package Log::Any::Plugin::Util;
-{
-  $Log::Any::Plugin::Util::VERSION = '0.002';
-}
 # ABSTRACT: Utilities for Log::Any::Plugin classes
-
+$Log::Any::Plugin::Util::VERSION = '0.003';
 use strict;
 use warnings;
 use Carp qw(croak);
@@ -42,13 +39,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Log::Any::Plugin::Util - Utilities for Log::Any::Plugin classes
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 DESCRIPTION
 
@@ -110,7 +109,7 @@ Stephen Thirlwall <sdt@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Stephen Thirlwall.
+This software is copyright (c) 2014 by Stephen Thirlwall.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

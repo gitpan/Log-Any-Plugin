@@ -1,14 +1,10 @@
 package Log::Any::Plugin;
-{
-  $Log::Any::Plugin::VERSION = '0.002';
-}
 # ABSTRACT: Adapter-modifying plugins for Log::Any
-
+$Log::Any::Plugin::VERSION = '0.003';
 use strict;
 use warnings;
 
 use Log::Any 0.12;
-use Log::Any::Adapter::Util qw( require_dynamic );
 use Log::Any::Plugin::Util  qw( get_class_name  );
 
 use Carp qw( croak );
@@ -19,7 +15,10 @@ sub add {
     my $adapter_class = ref Log::Any->get_logger(category => caller());
 
     $plugin_class = get_class_name($plugin_class);
-    require_dynamic($plugin_class);
+    unless ( defined( eval "require $plugin_class" ) )
+    {    ## no critic (ProhibitStringyEval)
+        die $@;
+    }
 
     $plugin_class->install($adapter_class, %plugin_args);
 }
@@ -30,13 +29,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Log::Any::Plugin - Adapter-modifying plugins for Log::Any
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -110,7 +111,7 @@ Stephen Thirlwall <sdt@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Stephen Thirlwall.
+This software is copyright (c) 2014 by Stephen Thirlwall.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

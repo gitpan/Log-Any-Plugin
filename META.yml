@@ -3,35 +3,36 @@ abstract: 'Adapter-modifying plugins for Log::Any'
 author:
   - 'Stephen Thirlwall <sdt@cpan.org>'
 build_requires:
-  Capture::Tiny: 0
-  Log::Any::Adapter: 0
-  Test::Differences: 0
-  Test::Exception: 0
-  Test::More: 0.88
-  Test::NoWarnings: 0
-  blib: 0
+  File::Spec: '0'
+  IO::Handle: '0'
+  IPC::Open3: '0'
+  Log::Any::Adapter: '0'
+  Test::Differences: '0'
+  Test::Exception: '0'
+  Test::More: '0'
+  Test::NoWarnings: '0'
+  perl: '5.006'
 configure_requires:
-  ExtUtils::MakeMaker: 6.30
+  ExtUtils::MakeMaker: '0'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.142690'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: Log-Any-Plugin
 requires:
-  Carp: 0
-  Data::Dumper: 0
-  Exporter: 0
-  Hash::Util: 0
-  Log::Any: 0.12
-  Log::Any::Adapter::Util: 0
-  base: 0
-  perl: 5.008
-  strict: 0
-  warnings: 0
+  Carp: '0'
+  Data::Dumper: '0'
+  Exporter: '0'
+  Hash::Util: '0'
+  Log::Any: '0.12'
+  base: '0'
+  perl: '5.006'
+  strict: '0'
+  warnings: '0'
 resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Log-Any-Plugin
   homepage: http://search.cpan.org/dist/Log-Any-Plugin
   repository: git://github.com/sdt/log-any-plugin.git
-version: 0.002
+version: '0.003'
